@@ -16,11 +16,11 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("Item Output Log Message"));
+	UE_LOG(LogTemp, Warning, TEXT("Item Output Log Message")); //basic output log message
 
 	if(GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, FString("Item Onscreen Message"));
+		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, FString("Item Onscreen Message")); //basic onscreen message
 	}
 	
 }
@@ -32,13 +32,13 @@ void AItem::Tick(float DeltaTime)
 
 	UE_LOG(LogTemp, Warning, TEXT("DeltaTime: %f"), DeltaTime);
 	
-	if (GEngine)
+	if (GEngine) //because of the possibility that GEngine might be a null pointer, we check if it is valid before using it
 	{
-		FString Name = GetName();
-		FString Message = FString::Printf(TEXT("Item Name: %s"), *Name);
-		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, Message);
+		FString Name = GetName(); //gets the name of the attached actor
+		FString Message = FString::Printf(TEXT("Item Name: %s"), *Name); //formats the message to be displayed onscreen, making use of a variable
+		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, Message); //displays the message onscreen for 60 seconds in cyan color
 
-		UE_LOG(LogTemp, Warning, TEXT("Item Name: %s"), *Name);
+		UE_LOG(LogTemp, Warning, TEXT("Item Name: %s"), *Name); //puts a message in the output log making use of a variable
 	}
 
 }
