@@ -2,6 +2,11 @@
 
 
 #include "Items/Item.h"
+#include "DrawDebugHelpers.h"
+#include "Slash/Slash.h"
+
+#define THIRTY 30 //examples of creating macros
+//#define DRAW_DEBUG_SPHERE(Location) if (GetWorld()) DrawDebugSphere(GetWorld(), Location, 25.f, 32, FColor::Red, true); (now included in slash.h for global usage)
 
 // Sets default values
 AItem::AItem()
@@ -22,7 +27,12 @@ void AItem::BeginPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, FString("Item Onscreen Message")); //basic onscreen message
 	}
-	
+
+	UWorld* World = GetWorld();
+	FVector Location = GetActorLocation();
+	DRAW_DEBUG_SPHERE(Location) //macro usage example, becuase i encluded a semi-colon in the macro definition, it isnt needed here, as a macro replaces it name at runtime.
+
+
 }
 
 // Called every frame

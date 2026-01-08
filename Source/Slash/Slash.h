@@ -4,3 +4,6 @@
 
 #include "CoreMinimal.h"
 
+//Global Definitions
+
+#define DRAW_DEBUG_SPHERE(Location) if (GetWorld()) DrawDebugSphere(GetWorld(), Location, 25.f, 32, FColor::Red, true);
