@@ -15,7 +15,13 @@ AItem::AItem()
 void AItem::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("Item BeginPlay called!"));
+
+	UE_LOG(LogTemp, Warning, TEXT("Item Output Log Message"));
+
+	if(GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(1, 60.f, FColor::Cyan, FString("Item Onscreen Message"));
+	}
 	
 }
 
