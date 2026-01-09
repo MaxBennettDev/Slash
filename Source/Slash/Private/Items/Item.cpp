@@ -24,8 +24,12 @@ void AItem::BeginPlay()
 	FVector Location = GetActorLocation();
 	FVector Forward = GetActorForwardVector();
 
-	DRAW_DEBUG_SPHERE(Location) //macro usage example, becuase i encluded a semi-colon in the macro definition, it isnt needed here, as a macro replaces it name at runtime.
-	DRAW_DEBUG_LINE(Location, Location + Forward * 100.f)
+	//macro usage example, becuase i encluded a semi-colon in the macro definition, it isnt needed here, as a macro replaces it name at runtime.
+	//however, i have added semi-colons here, to avoid the automatic indentation when writing a new line beneath.
+	DRAW_DEBUG_SPHERE(Location); 
+	//DRAW_DEBUG_LINE(Location, Location + Forward * 100.f); 
+	//DRAW_DEBUG_POINT(Location + Forward * 100.f);
+	DRAW_VECTOR(Location, Location + Forward * 100.f);
 }
 
 // Called every frame
