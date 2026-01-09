@@ -21,7 +21,6 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UWorld* World = GetWorld();
 	FVector Location = GetActorLocation();
 	FVector Forward = GetActorForwardVector();
 
