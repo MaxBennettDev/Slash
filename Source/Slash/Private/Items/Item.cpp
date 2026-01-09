@@ -4,6 +4,7 @@
 #include "Items/Item.h"
 #include "Slash/Slash.h"
 #include "Slash/DebugMacros.h"
+#include "DrawDebugHelpers.h"
 
 
 // Sets default values
@@ -26,7 +27,7 @@ void AItem::BeginPlay()
 	//however, i have added semi-colons here, to avoid the automatic indentation when writing a new line beneath.
 	DRAW_DEBUG_SPHERE(Location);
 	DRAW_VECTOR(Location, Location + Forward * 100.f);
-
+	DRAW_DEBUG_CONE(Location, Forward, 100.f);
 }
 
 // Called every frame
