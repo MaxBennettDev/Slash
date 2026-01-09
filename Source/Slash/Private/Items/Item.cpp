@@ -20,20 +20,20 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	FVector Location = GetActorLocation();
-	FVector Forward = GetActorForwardVector();
-
-	//macro usage example, becuase i encluded a semi-colon in the macro definition, it isnt needed here, as a macro replaces it name at runtime.
-	//however, i have added semi-colons here, to avoid the automatic indentation when writing a new line beneath.
-	DRAW_DEBUG_SPHERE(Location);
-	DRAW_VECTOR(Location, Location + Forward * 100.f);
-	DRAW_DEBUG_CONE(Location, Forward, 100.f);
 }
 
 // Called every frame
 void AItem::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	float MovementRate = 50.f;
+	float RotationRate = 45.f;
+
+	AddActorWorldOffset(FVector(MovementRate * DeltaTime, 0.f, 0.f));
+	AddActorWorldRotation(FRotator(0.f, RotationRate * DeltaTime, 0.f));
+	DRAW_SPHERE_SingleFrame(GetActorLocation());
+	DRAW_VECTOR_SingleFrame(GetActorLocation(), GetActorLocation() + GetActorForwardVector() * 100.f);
 
 }
 
