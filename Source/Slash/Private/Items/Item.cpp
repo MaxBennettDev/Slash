@@ -2,11 +2,9 @@
 
 
 #include "Items/Item.h"
-#include "DrawDebugHelpers.h"
 #include "Slash/Slash.h"
+#include "Slash/DebugMacros.h"
 
-#define THIRTY 30 //examples of creating macros
-//#define DRAW_DEBUG_SPHERE(Location) if (GetWorld()) DrawDebugSphere(GetWorld(), Location, 25.f, 32, FColor::Red, true); (now included in slash.h for global usage)
 
 // Sets default values
 AItem::AItem()
@@ -26,10 +24,9 @@ void AItem::BeginPlay()
 
 	//macro usage example, becuase i encluded a semi-colon in the macro definition, it isnt needed here, as a macro replaces it name at runtime.
 	//however, i have added semi-colons here, to avoid the automatic indentation when writing a new line beneath.
-	DRAW_DEBUG_SPHERE(Location); 
-	//DRAW_DEBUG_LINE(Location, Location + Forward * 100.f); 
-	//DRAW_DEBUG_POINT(Location + Forward * 100.f);
+	DRAW_DEBUG_SPHERE(Location);
 	DRAW_VECTOR(Location, Location + Forward * 100.f);
+
 }
 
 // Called every frame
