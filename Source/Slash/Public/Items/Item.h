@@ -33,6 +33,9 @@ protected:
 	template<typename T>
 	T Avg(T First, T Second);
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Rotation")
+	float RotateSpeed = 45.f;
+
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	float RunningTime;
