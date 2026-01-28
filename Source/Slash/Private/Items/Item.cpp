@@ -5,6 +5,7 @@
 #include "Slash/Slash.h"
 #include "Slash/DebugMacros.h"
 #include "DrawDebugHelpers.h"
+#include "Components/SphereComponent.h"
 
 
 // Sets default values (constructor)
@@ -16,6 +17,8 @@ AItem::AItem()
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMeshComponent"));
 	RootComponent = ItemMesh;
 
+	Sphere = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere"));
+	Sphere->SetupAttachment(GetRootComponent());
 }
 
 // Called when the game starts or when spawned
@@ -29,6 +32,7 @@ void AItem::BeginPlay()
 	float AvgFloat = Avg<float>(5.5f, 6.7f);
 	UE_LOG(LogTemp, Warning, TEXT("Average of 5.5 and 6.7 is: %f"), AvgFloat);
 
+	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnSphereOverlap);
 }
 
 float AItem::TransformedSin()
@@ -39,6 +43,15 @@ float AItem::TransformedSin()
 float AItem::TransformedCos()
 {
 	return Amplitude * FMath::Cos(RunningTime * TimeConstant);
+}
+
+void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	const FString OtherActorName = OtherActor->GetName();
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(1, 30.f, FColor::Red, OtherActorName);
+	}
 }
 
 // Called every frame
