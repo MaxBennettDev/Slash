@@ -6,6 +6,7 @@
 #include "Slash/DebugMacros.h"
 #include "DrawDebugHelpers.h"
 #include "Components/SphereComponent.h"
+#include "Characters/SlashCharacter.h"
 
 
 // Sets default values (constructor)
@@ -26,12 +27,6 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 
-	int32 AvgInt = Avg<int32>(1, 3);
-	UE_LOG(LogTemp, Warning, TEXT("Average of 1 and 3 is: %d"), AvgInt);
-
-	float AvgFloat = Avg<float>(5.5f, 6.7f);
-	UE_LOG(LogTemp, Warning, TEXT("Average of 5.5 and 6.7 is: %f"), AvgFloat);
-
 	Sphere->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnSphereOverlap);
 	Sphere->OnComponentEndOverlap.AddDynamic(this, &AItem::OnSphereEndOverlap);
 }
@@ -48,19 +43,19 @@ float AItem::TransformedCos()
 
 void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	const FString OtherActorName = FString("Begining overlap with: ") + OtherActor->GetName();
-	if (GEngine)
+	ASlashCharacter* SlashCharacter = Cast<ASlashCharacter>(OtherActor);
+	if (SlashCharacter)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 30.f, FColor::Red, OtherActorName);
+		SlashCharacter->SetOverlappingItem(this);
 	}
 }
 
 void AItem::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	const FString OtherActorName = FString("Ending overlap with: ") + OtherActor->GetName();
-	if (GEngine)
+	ASlashCharacter* SlashCharacter = Cast<ASlashCharacter>(OtherActor);
+	if (SlashCharacter)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 30.f, FColor::Red, OtherActorName);
+		SlashCharacter->SetOverlappingItem(nullptr);
 	}
 }
 
