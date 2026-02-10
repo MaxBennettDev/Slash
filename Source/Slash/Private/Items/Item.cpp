@@ -71,7 +71,7 @@ void AItem::Tick(float DeltaTime)
 
 	RunningTime += DeltaTime;
 
-	AddActorWorldRotation(FRotator(0.f, RotateSpeed * DeltaTime, 0.f));
+	//AddActorWorldRotation(FRotator(0.f, RotateSpeed * DeltaTime, 0.f));
 
 }
 
